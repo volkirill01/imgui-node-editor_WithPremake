@@ -1,4 +1,9 @@
 .vs
+*.vcxproj
+*.vcxproj.filters
+*.log
+*.tlog
+*.obj
 .vscode
 .build*
 .DS_Store
