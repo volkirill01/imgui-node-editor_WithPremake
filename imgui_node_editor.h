@@ -306,6 +306,11 @@ IMGUI_NODE_EDITOR_API void PopStyleVar(int count = 1);
 IMGUI_NODE_EDITOR_API void Begin(const char* id, const ImVec2& size = ImVec2(0, 0));
 IMGUI_NODE_EDITOR_API void End();
 
+IMGUI_NODE_EDITOR_API void SetNodeLockPosition(NodeId id, bool value); // [Tethys Custom]
+IMGUI_NODE_EDITOR_API bool GetNodeLockPosition(NodeId id); // [Tethys Custom]
+IMGUI_NODE_EDITOR_API void SetNodeLockResize(NodeId id, bool value); // [Tethys Custom]
+IMGUI_NODE_EDITOR_API bool GetNodeLockResize(NodeId id); // [Tethys Custom]
+
 IMGUI_NODE_EDITOR_API void BeginNode(NodeId id);
 IMGUI_NODE_EDITOR_API void BeginPin(PinId id, PinKind kind);
 IMGUI_NODE_EDITOR_API void PinRect(const ImVec2& a, const ImVec2& b);

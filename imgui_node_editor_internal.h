@@ -405,6 +405,10 @@ struct Node final: Object
     bool     m_RestoreState;
     bool     m_CenterOnScreen;
 
+    // [Tethys Custom]
+    bool     m_LockPosition;
+    bool     m_LockResize;
+
     Node(EditorContext* editor, NodeId id)
         : Object(editor)
         , m_ID(id)
@@ -422,6 +426,8 @@ struct Node final: Object
         , m_HighlightConnectedLinks(false)
         , m_RestoreState(false)
         , m_CenterOnScreen(false)
+        , m_LockPosition(false) // [Tethys Custom]
+        , m_LockResize(false) // [Tethys Custom]
     {
     }
 

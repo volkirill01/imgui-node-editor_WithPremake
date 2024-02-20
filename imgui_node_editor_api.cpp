@@ -143,6 +143,27 @@ void ax::NodeEditor::End()
     s_Editor->End();
 }
 
+// [Tethys Custom]
+void ax::NodeEditor::SetNodeLockPosition(NodeId id, bool value)
+{
+    s_Editor->FindNode(id)->m_LockPosition = value;
+}
+// [Tethys Custom]
+bool ax::NodeEditor::GetNodeLockPosition(NodeId id)
+{
+    return s_Editor->FindNode(id)->m_LockPosition;
+}
+// [Tethys Custom]
+void ax::NodeEditor::SetNodeLockResize(NodeId id, bool value)
+{
+    s_Editor->FindNode(id)->m_LockResize = value;
+}
+// [Tethys Custom]
+bool ax::NodeEditor::GetNodeLockResize(NodeId id)
+{
+    return s_Editor->FindNode(id)->m_LockResize;
+}
+
 void ax::NodeEditor::BeginNode(NodeId id)
 {
     s_Editor->GetNodeBuilder().Begin(id);

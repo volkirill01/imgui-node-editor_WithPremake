@@ -1345,6 +1345,14 @@ void ed::EditorContext::End()
 
         auto accept = [&possibleAction, &control](EditorAction& action)
         {
+            if (control.HotObject && control.HotObject->AsNode())
+            {
+                if (action.AsDrag() && control.HotObject->AsNode()->m_LockPosition)
+                    return false;
+                if (action.AsSize() && control.HotObject->AsNode()->m_LockResize)
+                    return false;
+            }
+
             auto result = action.Accept(control);
 
             if (result == EditorAction::True)
