@@ -1345,14 +1345,6 @@ void ed::EditorContext::End()
 
         auto accept = [&possibleAction, &control](EditorAction& action)
         {
-            if (control.HotObject && control.HotObject->AsNode())
-            {
-                if (action.AsDrag() && control.HotObject->AsNode()->m_LockPosition)
-                    return false;
-                if (action.AsSize() && control.HotObject->AsNode()->m_LockResize)
-                    return false;
-            }
-
             auto result = action.Accept(control);
 
             if (result == EditorAction::True)
@@ -1365,13 +1357,14 @@ void ed::EditorContext::End()
             return false;
         };
 
+        Node* asNode = control.HotObject ? control.HotObject->AsNode() : nullptr;
         if (accept(m_ContextMenuAction))
             m_CurrentAction = &m_ContextMenuAction;
         else if (accept(m_ShortcutAction))
             m_CurrentAction = &m_ShortcutAction;
-        else if (accept(m_SizeAction))
+        else if ((asNode && !asNode->m_LockResize) && accept(m_SizeAction)) // [Tethys Custom]
             m_CurrentAction = &m_SizeAction;
-        else if (accept(m_DragAction))
+        else if ((asNode && !asNode->m_LockPosition) && accept(m_DragAction)) // [Tethys Custom]
             m_CurrentAction = &m_DragAction;
         else if (accept(m_CreateItemAction))
             m_CurrentAction = &m_CreateItemAction;
