@@ -1,8 +1,14 @@
+IMGUI_NODE_EDITOR_STATIC_LINKINK = true
+
 project "ImGui-node-editor"
-	kind "StaticLib"
+	if IMGUI_NODE_EDITOR_STATIC_LINKINK then
+		kind "StaticLib"
+	else
+		kind "SharedLib"
+	end
 	language "C++"
 	cppdialect "C++17"
-    staticruntime "off"
+	staticruntime "off"
 
 	warnings "Off"
 
@@ -27,6 +33,18 @@ project "ImGui-node-editor"
 		"examples/**"
 	}
 
+	if not IMGUI_STATIC_LINKINK then
+		defines { "IMGUI_API=__declspec(dllexport)" }
+	end
+	if not IMGUI_NODE_EDITOR_STATIC_LINKINK then
+		defines { "IMGUI_NODE_EDITOR_API=__declspec(dllexport)" }
+	end
+
+	links
+	{
+		"ImGui"
+	}
+
 	filter "system:windows"
 		systemversion "latest"
 
@@ -42,7 +60,7 @@ project "ImGui-node-editor"
 		runtime "Release"
 		optimize "on"
 
-    filter "configurations:Dist"
+	filter "configurations:Dist"
 		runtime "Release"
 		optimize "on"
-        symbols "off"
+		symbols "off"
